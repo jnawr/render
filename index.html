@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Photo Slider</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <!-- Dodany filtr SVG dla efektu Ambilight -->
+    <svg width="0" height="0">
+        <filter
+            id="ambilight"
+            width="300%"
+            height="300%"
+            x="-0.75"
+            y="-0.75"
+            color-interpolation-filters="sRGB"
+        >
+            <feOffset in="SourceGraphic" result="source-copy" />
+            <feColorMatrix
+                in="source-copy"
+                type="saturate"
+                values="3"
+                result="saturated-copy"
+            />
+            <feColorMatrix
+                in="saturated-copy"
+                type="matrix"
+                values="1 0 0 0 0
+                        0 1 0 0 0
+                        0 0 1 0 0
+                        33 33 33 101 -132"
+                result="bright-colors"
+            />
+            <feMorphology
+                in="bright-colors"
+                operator="dilate"
+                radius="10"
+                result="spread"
+            />
+            <feGaussianBlur
+                in="spread"
+                stdDeviation="30"
+                result="ambilight-light"
+            />
+            <feOffset in="SourceGraphic" result="source" />
+            <feComposite in="source" in2="ambilight-light" operator="over" />
+        </filter>
+    </svg>
+
+    <!-- Slider -->
+    <div class="slider ambilight">
+        <div class="slides">
+            <img src="images/1.webp" alt="Slide 1" class="slide">
+            <img src="images/2.webp" alt="Slide 2" class="slide">
+            <img src="images/3.webp" alt="Slide 3" class="slide">
+            <img src="images/4.webp" alt="Slide 4" class="slide">
+            <img src="images/5.webp" alt="Slide 5" class="slide">
+            <img src="images/6.webp" alt="Slide 6" class="slide">
+            <img src="images/7.webp" alt="Slide 7" class="slide">
+            <img src="images/8.webp" alt="Slide 8" class="slide">
+            <img src="images/9.webp" alt="Slide 9" class="slide">
+        </div>
+        <div class="progress-bar">
+            <div class="progress"></div>
+        </div>
+        <div class="controls">
+            <button id="prev"><i class="fas fa-chevron-left"></i></button>
+            <button id="pause"><i class="fas fa-pause"></i></button>
+            <button id="next"><i class="fas fa-chevron-right"></i></button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
+
+

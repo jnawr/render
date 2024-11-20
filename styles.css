@@ -1,0 +1,111 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    
+    transition: background 0.8s ease-in-out; /* Płynne przejście tła */
+    background: rgba(0, 0, 0, 0.8); /* Domyślne ciemne tło */
+}
+
+.slider {
+    position: relative;
+    width: 90%;
+    max-width: 1000px;
+    aspect-ratio: 16 / 9; /* Utrzymanie proporcji */
+    overflow: hidden;
+    border-radius: 20px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(8px);
+    filter: url(#ambilight); /* Efekt Ambilight */
+}
+
+.slides {
+    display: flex;
+    transition: transform 0.5s ease;
+    width: 100%;
+    height: 100%;
+}
+
+.slide {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Dopasowanie obrazu do kontenera */
+    flex-shrink: 0; /* Zapobiega zwężaniu się obrazów */
+}
+
+.progress-bar {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 5px;
+    background: rgba(255, 255, 255, 0.5);
+    overflow: hidden;
+}
+
+.progress {
+    width: 0;
+    height: 100%;
+    background: #252d34; /* Kolor paska postępu */
+    transition: width 5s linear;
+}
+
+.controls {
+    position: absolute;
+    width: 100%;
+    top: 50%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    opacity: 0;
+    transform: translateY(-50%);
+    transition: opacity 0.3s;
+    padding: 0 20px;
+}
+
+.slider:hover .controls {
+    opacity: 1;
+}
+
+.controls button {
+    background: none;
+    border: none;
+    font-size: 2em;
+    cursor: pointer;
+    color: white;
+    transition: transform 0.3s ease;
+}
+
+.controls button:hover {
+    transform: scale(1.2);
+    color: #ef2915; /* Kolor hover na przyciskach */
+}
+
+@media (max-width: 968px) {
+    .slider {
+        width: 75%;
+        /*aspect-ratio: auto;*/ /* Dostosowanie do mniejszych ekranów */
+    }
+
+    .controls button {
+        font-size: 1.5em;
+    }
+
+    .progress-bar {
+        height: 4px;
+    }
+}
+
+@media (max-width: 468px) {
+    .slider {
+        width: 95%;
+    }
+}
